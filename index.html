@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimbrough Legal Intake and Case Management — Case Study</title>
+<meta name="description" content="AI-powered legal intake and case triage built on the Claude API. A portfolio case study by John Carlo.">
+<style>
+  :root {
+    --navy: #1A365D;
+    --navy-light: #2C5282;
+    --ink: #1A202C;
+    --body: #2D3748;
+    --muted: #5A6878;
+    --bg: #F4F6F9;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --green: #38A169;
+    --amber: #DD6B20;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero {
+    background: linear-gradient(135deg, #1A365D, #2C5282);
+    color: #fff;
+    padding: 66px 0 56px;
+  }
+  .hero h1 { font-size: 2.15rem; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.01em; }
+  .hero .tagline { font-size: 1.12rem; color: #CBD5E0; margin-bottom: 26px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.20);
+    padding: 5px 13px; border-radius: 20px; font-size: 0.82rem; color: #EDF2F7;
+  }
+  .links a {
+    display: inline-block; background: #fff; color: var(--navy);
+    text-decoration: none; font-weight: 600; font-size: 0.92rem;
+    padding: 10px 18px; border-radius: 6px;
+  }
+
+  main { padding: 50px 0 10px; }
+  section { margin-bottom: 46px; }
+  h2 {
+    font-size: 1.4rem; color: var(--navy);
+    border-bottom: 2px solid var(--border); padding-bottom: 9px; margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  h3 { font-size: 1.06rem; margin: 18px 0 6px; color: var(--navy-light); }
+  p { margin-bottom: 12px; }
+  ul { margin: 8px 0 14px 22px; }
+  li { margin-bottom: 6px; }
+  .lead { font-size: 1.05rem; }
+  .muted { color: var(--muted); }
+
+  .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 22px;
+  }
+  .card h3 { margin-top: 0; display: flex; align-items: center; }
+  .num {
+    display: inline-flex; width: 26px; height: 26px;
+    align-items: center; justify-content: center;
+    background: var(--navy); color: #fff;
+    border-radius: 50%; font-size: 0.82rem; margin-right: 10px; flex-shrink: 0;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: #EDF2F7; color: var(--navy); font-weight: 600; }
+
+  .scope { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+  .box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px;
+  }
+  .box.in { border-left: 4px solid var(--green); }
+  .box.out { border-left: 4px solid var(--amber); }
+  .box h3 { margin-top: 0; }
+
+  code {
+    background: #EDF2F7; padding: 1px 6px; border-radius: 4px;
+    font-family: "SF Mono", SFMono-Regular, Consolas, Menlo, monospace; font-size: 0.86em;
+  }
+  a.inline { color: var(--navy-light); }
+
+  footer {
+    border-top: 1px solid var(--border); margin-top: 20px;
+    padding: 28px 0 52px; color: var(--muted); font-size: 0.86rem;
+  }
+
+  @media (max-width: 640px) {
+    .scope { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.75rem; }
+    header.hero { padding: 48px 0 42px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Kimbrough Legal Intake and Case Management</h1>
+    <p class="tagline">AI-powered legal intake and case triage, built on the Claude API</p>
+    <div class="chips">
+      <span class="chip">Working prototype</span>
+      <span class="chip">Claude API</span>
+      <span class="chip">Python and Streamlit</span>
+      <span class="chip">Privacy-first design</span>
+      <span class="chip">Solo build, ~6 to 10 hours</span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/cainticjohncarlo-pixel/kimbrough-legal-intake" target="_blank" rel="noopener">View GitHub Repository</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Overview</h2>
+    <p class="lead">A tool that handles legal intake and case management from end to end, built around the Claude API. It captures a client inquiry, uses Claude to triage it, stores it as structured data, and gives staff a dashboard to track the whole caseload. Privacy is part of the design, not something added at the end.</p>
+    <p class="muted">Built solo as a take-home project for a Claude AI Specialist role. The brief asked for an Intake Assistant plus one of two additional components. I built the Intake Assistant and the Case Tracking System, because the two connect naturally: an intake flows straight into the tracker.</p>
+  </section>
+
+  <section>
+    <h2>The Problem</h2>
+    <p>Law firms receive client inquiries through many channels: web forms, email, phone notes, chat. Someone has to read each one, work out what kind of case it is, judge how urgent it is, and route it to the right person. That work is slow, easy to get wrong when volume is high, and every inquiry is full of sensitive personal information that has to be handled carefully.</p>
+  </section>
+
+  <section>
+    <h2>What It Does</h2>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="num">1</span> Intake Assistant</h3>
+        <p>Captures an inquiry from a structured form, a pasted email, or a chat transcript. Uses Claude to summarize the matter, categorize it into one of 11 practice areas with a confidence level, assign an urgency level against a written rubric, and extract key facts, potential deadlines, recommended next steps, and missing information. The result is saved as structured data with a one-click Excel export.</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">2</span> Case Tracking System</h3>
+        <p>A dashboard with caseload metrics and filters by practice area, urgency, and status. Per-case detail views with an editable status workflow. An AI generated caseload briefing that summarizes the whole caseload and flags priorities. One-click Excel export of the full case list.</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">3</span> Data Privacy and Confidentiality</h3>
+        <p>Detects sensitive data in free text (emails, phone numbers, SSNs, payment card numbers, addresses, dates, and known client names) and redacts it to placeholder tokens before any text is sent to the Claude API, so the model never receives raw client PII. Contact details are masked by default in the interface, with reveal as a logged action. Only the minimum is stored, the raw inquiry text is never persisted, and an append-only audit log records every privacy-relevant action.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tech Stack and Why</h2>
+    <table>
+      <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+      <tr><td>LLM</td><td>Claude Opus 4.7 via the official Anthropic Python SDK</td><td>Nuanced legal triage benefits from the most capable model.</td></tr>
+      <tr><td>Structured output</td><td><code>messages.parse</code> with a Pydantic schema</td><td>Guarantees a validated result object instead of brittle text parsing.</td></tr>
+      <tr><td>Cost control</td><td>Prompt caching on the intake system prompt</td><td>The system prompt is identical on every intake, so repeat runs reuse the prefix.</td></tr>
+      <tr><td>Interface</td><td>Streamlit</td><td>Fast to build a clear, usable interface that a reviewer can run locally.</td></tr>
+      <tr><td>Storage</td><td>SQLite with openpyxl for Excel export</td><td>Self-contained, no external accounts needed to run or review it.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Architecture</h2>
+    <p>The flow is: capture the inquiry, detect and redact PII, show a transparency panel, send only redacted text to Claude, get back a validated structured result, store it, and surface it in the dashboard and insights views.</p>
+    <p>A key design point: redacted text is the only thing that ever reaches the API. The privacy layer sits between the user and the model, not after it. The full workflow diagram and a component breakdown are in <code>docs/architecture.md</code> in the repository.</p>
+  </section>
+
+  <section>
+    <h2>Project Scope</h2>
+    <p>This was a time-boxed take-home project, roughly 6 to 10 hours. The goal was to demonstrate practical solution design for a legal workflow, not to ship a production system. The scope was set deliberately.</p>
+    <div class="scope">
+      <div class="box in">
+        <h3>In scope and built</h3>
+        <ul>
+          <li>The Intake Assistant: capture, summarize, categorize, prioritize, extract.</li>
+          <li>The Case Tracking System: dashboard, filters, case detail, status workflow, insights, export.</li>
+          <li>The full privacy layer: detect, redact, mask, minimize, audit.</li>
+          <li>Complete documentation: README, architecture diagram, Microsoft 365 integration plan, and data privacy notes.</li>
+        </ul>
+      </div>
+      <div class="box out">
+        <h3>Intentionally out of scope</h3>
+        <ul>
+          <li>Authentication and multi-user roles. Described in the integration plan.</li>
+          <li>Hosting and deployment. The app runs locally with documented steps.</li>
+          <li>ML-based PII detection. The prototype uses pattern matching, which is reliable and auditable for structured identifiers.</li>
+          <li>A live Microsoft 365 integration. Planned in detail, not implemented.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted">Why these boundaries: the goal was a clear, working demonstration of the core idea, with the production path documented rather than half-built. Knowing what to leave out, and writing down why, is part of the work.</p>
+  </section>
+
+  <section>
+    <h2>Design Decisions and Tradeoffs</h2>
+    <ul>
+      <li><strong>Case Tracking System over Knowledge Assistant.</strong> It forms one coherent story with the Intake Assistant: an intake flows straight into the tracker.</li>
+      <li><strong>Redact before send, not after.</strong> The model never receives raw PII at all. That is a stronger guarantee than relying on the model to behave correctly with sensitive data.</li>
+      <li><strong>SQLite over a hosted database.</strong> A reviewer can clone the repo and run it instantly, with no accounts to set up.</li>
+      <li><strong>Structured outputs over free-text parsing.</strong> The triage result is always a valid, typed object, which removes a whole class of bugs.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What I Would Build Next</h2>
+    <ul>
+      <li>Authentication and role-based access for intake staff, attorneys, and admins.</li>
+      <li>Named entity recognition to catch free-form names that pattern matching misses.</li>
+      <li>The Microsoft 365 integration: Outlook intake capture, Dataverse or SharePoint storage, Power Automate routing, Teams alerts for urgent cases.</li>
+      <li>Conflict checking against existing clients.</li>
+      <li>Automatic notifications for high-urgency intakes.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What This Project Demonstrates</h2>
+    <ul>
+      <li>Designing a practical workflow around an LLM, not just calling an API.</li>
+      <li>Working with the Claude API: structured outputs, prompt caching, adaptive thinking.</li>
+      <li>Privacy-first engineering: detection, redaction, masking, data minimization, and auditing.</li>
+      <li>Clear technical writing: README, architecture diagram, integration plan, privacy notes.</li>
+      <li>Scoping judgment: deciding what to build, what to document, and why.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Running the Demo</h2>
+    <p>The app runs locally. For a presentation, it is launched on the presenter's own machine with <code>streamlit run app.py</code> and viewed in the browser at <code>http://localhost:8501</code>. Full setup steps are in the README in the repository.</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>Case study by John Carlo. Source code and full documentation:
+  <a class="inline" href="https://github.com/cainticjohncarlo-pixel/kimbrough-legal-intake" target="_blank" rel="noopener">github.com/cainticjohncarlo-pixel/kimbrough-legal-intake</a></p>
+</footer>
+
+</body>
+</html>
